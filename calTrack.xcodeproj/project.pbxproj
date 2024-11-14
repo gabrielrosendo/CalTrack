@@ -14,6 +14,8 @@
 		C06F08B32CE0538900CD04AE /* calTrackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F08B22CE0538900CD04AE /* calTrackTests.swift */; };
 		C06F08BD2CE0538900CD04AE /* calTrackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F08BC2CE0538900CD04AE /* calTrackUITests.swift */; };
 		C06F08BF2CE0538900CD04AE /* calTrackUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F08BE2CE0538900CD04AE /* calTrackUITestsLaunchTests.swift */; };
+		C06F08CC2CE053A800CD04AE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F08CB2CE053A800CD04AE /* User.swift */; };
+		C06F08CE2CE053C600CD04AE /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F08CD2CE053C600CD04AE /* UserViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		C06F08B82CE0538900CD04AE /* calTrackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = calTrackUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C06F08BC2CE0538900CD04AE /* calTrackUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calTrackUITests.swift; sourceTree = "<group>"; };
 		C06F08BE2CE0538900CD04AE /* calTrackUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calTrackUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C06F08CB2CE053A800CD04AE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C06F08CD2CE053C600CD04AE /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,8 @@
 			children = (
 				C06F08A02CE0538700CD04AE /* calTrackApp.swift */,
 				C06F08A22CE0538700CD04AE /* ContentView.swift */,
+				C06F08CB2CE053A800CD04AE /* User.swift */,
+				C06F08CD2CE053C600CD04AE /* UserViewModel.swift */,
 				C06F08A42CE0538900CD04AE /* Assets.xcassets */,
 				C06F08A62CE0538900CD04AE /* calTrack.entitlements */,
 				C06F08A72CE0538900CD04AE /* Preview Content */,
@@ -193,7 +199,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					C06F089C2CE0538700CD04AE = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -260,7 +266,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C06F08A32CE0538700CD04AE /* ContentView.swift in Sources */,
+				C06F08CE2CE053C600CD04AE /* UserViewModel.swift in Sources */,
 				C06F08A12CE0538700CD04AE /* calTrackApp.swift in Sources */,
+				C06F08CC2CE053A800CD04AE /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,9 +338,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -388,9 +398,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -414,7 +426,9 @@
 				CODE_SIGN_ENTITLEMENTS = calTrack/calTrack.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"calTrack/Preview Content\"";
+				DEVELOPMENT_TEAM = 92Y4U2Q45M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -450,7 +464,9 @@
 				CODE_SIGN_ENTITLEMENTS = calTrack/calTrack.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"calTrack/Preview Content\"";
+				DEVELOPMENT_TEAM = 92Y4U2Q45M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -481,10 +497,10 @@
 		C06F08C62CE0538900CD04AE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
@@ -503,10 +519,10 @@
 		C06F08C72CE0538900CD04AE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
@@ -525,9 +541,10 @@
 		C06F08C92CE0538900CD04AE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 92Y4U2Q45M;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
@@ -546,9 +563,10 @@
 		C06F08CA2CE0538900CD04AE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 92Y4U2Q45M;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
