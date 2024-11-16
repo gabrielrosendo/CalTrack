@@ -4,4 +4,5 @@ A simple calorie tracking app that allows users to log meals, set calorie goals,
 
 # Screenshots v1
 ![image](https://github.com/user-attachments/assets/932f0404-9b68-4f6b-a5ac-0e605bf9e12a)
-![image](https://github.com/user-attachments/assets/866d3ca2-8be9-4960-a9a1-717f3d8b6909)
+![image](https://github.com/user-attachments/assets/4fc0e3b6-47eb-4788-af29-37e0e8455f3c)
+
