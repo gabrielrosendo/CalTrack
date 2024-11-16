@@ -1,43 +1,43 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var userViewModel = UserViewModel()
+    @StateObject var userViewModel = UserViewModel() // Declaring userViewModel
     
     var body: some View {
         NavigationView {
-                VStack {
-                    Text("Calorie Tracker")
-                    switch userViewModel.loadingState {
-                    case .loading:
-                        ProgressView()
-                        Text("Loading data...")
-                            .padding()
-                    case .loaded:
-                        if let user = userViewModel.users.first {
-                            UserContentView(user: user)
-                        } else {
-                            Text("No user data available")
-                                .font(.title)
-                                .padding()
-                        }
-                    case .error(let message):
-                        VStack {
-                            Image(systemName: "exclamationmark.triangle")
-                                .font(.largeTitle)
-                                .foregroundColor(.red)
-                            Text("Error: \(message)")
-                                .padding()
-                            Button("Retry") {
-                                userViewModel.fetchUsers()
-                            }
-                            .buttonStyle(.bordered)
-                        }
+            VStack {
+                Text("Calorie Tracker")
+                switch userViewModel.loadingState {
+                case .loading:
+                    ProgressView()
+                    Text("Loading data...")
                         .padding()
+                case .loaded:
+                    if let user = userViewModel.users.first {
+                        UserContentView(user: user, userViewModel: userViewModel) // Pass userViewModel here
+                    } else {
+                        Text("No user data available")
+                            .font(.title)
+                            .padding()
                     }
+                case .error(let message):
+                    VStack {
+                        Image(systemName: "exclamationmark.triangle")
+                            .font(.largeTitle)
+                            .foregroundColor(.red)
+                        Text("Error: \(message)")
+                            .padding()
+                        Button("Retry") {
+                            userViewModel.fetchUsers()
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                    .padding()
                 }
-                .background(Color.black)
-                .foregroundColor(.white)
             }
+            .background(Color.black)
+            .foregroundColor(.white)
+        }
         .onAppear {
             userViewModel.fetchUsers()
         }
@@ -46,12 +46,15 @@ struct ContentView: View {
 
 struct UserContentView: View {
     let user: User
+    @ObservedObject var userViewModel: UserViewModel // Add this line
     var totalCalories: Int {
         user.meals.reduce(0) {$0 + $1.calories}
     }
+    @State private var showAddMealModal = false
     
     var body: some View {
-        TabView{
+        TabView {
+            // First Tab: Calorie Tracker
             VStack {
                 Text("Welcome, \(user.username)")
                     .font(.largeTitle)
@@ -63,15 +66,22 @@ struct UserContentView: View {
                 CalorieBar(user: user)
                 
                 ProgressSection(user: user)
-                
             }
             .padding()
             .tag(0)
-            VStack{
+            
+            // Second Tab: Meal Logging
+            VStack {
                 Text("Meals Logged")
                     .font(.title2)
                     .padding([.top, .leading])
                 
+                Button("Add Meal") {
+                    showAddMealModal.toggle()
+                }
+                .padding(.bottom)
+                
+                BarcodeScanner()
                 MealListView(meals: user.meals)
             }
             .padding()
@@ -79,8 +89,75 @@ struct UserContentView: View {
         }
         .tabViewStyle(.page)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .sheet(isPresented: $showAddMealModal) {
+            AddMealView(userViewModel: userViewModel, userID: user.id)
+        }
     }
 }
+
+struct AddMealView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var userViewModel: UserViewModel
+    @State private var name: String = ""
+    @State private var calories: String = ""
+    @State private var protein: String = ""
+    @State private var fat: String = ""
+    @State private var carbs: String = ""
+    var userID: String // userID to associate meal with specific user
+
+    var body: some View {
+        NavigationView {
+            Form {
+                Section(header: Text("Meal Details")) {
+                    TextField("Name", text: $name)
+                    TextField("Calories", text: $calories)
+                        .keyboardType(.numberPad)
+                    TextField("Protein (g)", text: $protein)
+                        .keyboardType(.numberPad)
+                    TextField("Fat (g)", text: $fat)
+                        .keyboardType(.numberPad)
+                    TextField("Carbs (g)", text: $carbs)
+                        .keyboardType(.numberPad)
+                }
+            }
+            .navigationTitle("Add Meal")
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") {
+                        saveMeal()
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+            }
+        }
+    }
+
+    func saveMeal() {
+        guard let calories = Int(calories),
+              let protein = Int(protein),
+              let fat = Int(fat),
+              let carbs = Int(carbs),
+              !name.isEmpty else {
+            print("Invalid input")
+            return
+        }
+
+        let newMeal = User.Meal(
+            name: name,
+            calories: calories,
+            carbs: carbs,
+            fat: fat,
+            protein: protein
+        )
+        userViewModel.addMeal(to: userID, meal: newMeal) // Correctly calling addMeal
+    }
+}
+
 
 struct CalorieBar: View {
     var user: User

@@ -57,4 +57,16 @@ class UserViewModel: ObservableObject {
         
         task.resume()
     }
+    
+    // Move the addMeal function outside of fetchUsers
+    func addMeal(to userID: String, meal: User.Meal) {
+        // Find the user with the given userID
+        if let index = users.firstIndex(where: { $0.id == userID }) {
+            // Add the new meal to the user's meals array
+            users[index].meals.append(meal)
+            print("Meal added to user \(userID): \(meal)")
+        } else {
+            print("User with ID \(userID) not found.")
+        }
+    }
 }

@@ -16,6 +16,7 @@
 		C06F08BF2CE0538900CD04AE /* calTrackUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F08BE2CE0538900CD04AE /* calTrackUITestsLaunchTests.swift */; };
 		C06F08CC2CE053A800CD04AE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F08CB2CE053A800CD04AE /* User.swift */; };
 		C06F08CE2CE053C600CD04AE /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F08CD2CE053C600CD04AE /* UserViewModel.swift */; };
+		C08F627D2CE704BD0018E230 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08F627C2CE704B60018E230 /* ScanView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		C06F08BE2CE0538900CD04AE /* calTrackUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calTrackUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C06F08CB2CE053A800CD04AE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C06F08CD2CE053C600CD04AE /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		C08F627C2CE704B60018E230 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		C06F089F2CE0538700CD04AE /* calTrack */ = {
 			isa = PBXGroup;
 			children = (
+				C08F627C2CE704B60018E230 /* ScanView.swift */,
 				C06F08A02CE0538700CD04AE /* calTrackApp.swift */,
 				C06F08A22CE0538700CD04AE /* ContentView.swift */,
 				C06F08CB2CE053A800CD04AE /* User.swift */,
@@ -267,6 +270,7 @@
 			files = (
 				C06F08A32CE0538700CD04AE /* ContentView.swift in Sources */,
 				C06F08CE2CE053C600CD04AE /* UserViewModel.swift in Sources */,
+				C08F627D2CE704BD0018E230 /* ScanView.swift in Sources */,
 				C06F08A12CE0538700CD04AE /* calTrackApp.swift in Sources */,
 				C06F08CC2CE053A800CD04AE /* User.swift in Sources */,
 			);
@@ -431,6 +435,7 @@
 				DEVELOPMENT_TEAM = 92Y4U2Q45M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Need access to camera to scan barcodes.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -469,6 +474,7 @@
 				DEVELOPMENT_TEAM = 92Y4U2Q45M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Need access to camera to scan barcodes.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
