@@ -46,9 +46,9 @@ struct ContentView: View {
 
 struct UserContentView: View {
     let user: User
-    @ObservedObject var userViewModel: UserViewModel // Add this line
+    @ObservedObject var userViewModel: UserViewModel
     var totalCalories: Int {
-        user.meals.reduce(0) {$0 + $1.calories}
+        user.meals.reduce(0) { $0 + $1.calories }
     }
     @State private var showAddMealModal = false
     
@@ -81,7 +81,7 @@ struct UserContentView: View {
                 }
                 .padding(.bottom)
                 
-                BarcodeScanner()
+                BarcodeScanner(userViewModel: userViewModel, userID: user.id)
                 MealListView(meals: user.meals)
             }
             .padding()
@@ -94,69 +94,90 @@ struct UserContentView: View {
         }
     }
 }
-
 struct AddMealView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var userViewModel: UserViewModel
-    @State private var name: String = ""
-    @State private var calories: String = ""
-    @State private var protein: String = ""
-    @State private var fat: String = ""
-    @State private var carbs: String = ""
-    var userID: String // userID to associate meal with specific user
+    @State private var name: String
+    @State private var calories: String
+    @State private var protein: String
+    @State private var fat: String
+    @State private var carbs: String
+    let userID: String
+    
+    init(userViewModel: UserViewModel,
+         userID: String,
+         name: String = "",
+         calories: String = "",
+         protein: String = "",
+         fat: String = "",
+         carbs: String = "") {
+        self.userViewModel = userViewModel
+        self.userID = userID
+        _name = State(initialValue: name)
+        _calories = State(initialValue: calories)
+        _protein = State(initialValue: protein)
+        _fat = State(initialValue: fat)
+        _carbs = State(initialValue: carbs)
+    }
 
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Meal Details")) {
+                Section(header: Text("Meal Details")
+                    .foregroundColor(.black)) {
                     TextField("Name", text: $name)
+                        .foregroundColor(.black)
                     TextField("Calories", text: $calories)
                         .keyboardType(.numberPad)
+                        .foregroundColor(.black)
                     TextField("Protein (g)", text: $protein)
                         .keyboardType(.numberPad)
+                        .foregroundColor(.black)
                     TextField("Fat (g)", text: $fat)
                         .keyboardType(.numberPad)
+                        .foregroundColor(.black)
                     TextField("Carbs (g)", text: $carbs)
                         .keyboardType(.numberPad)
+                        .foregroundColor(.black)
                 }
             }
+            .background(Color.white) // Background color
             .navigationTitle("Add Meal")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         presentationMode.wrappedValue.dismiss()
                     }
+                        .foregroundColor(.black)
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
                         saveMeal()
                         presentationMode.wrappedValue.dismiss()
                     }
+                        .foregroundColor(.black)
                 }
             }
         }
     }
 
-    func saveMeal() {
-        guard let calories = Int(calories),
-              let protein = Int(protein),
-              let fat = Int(fat),
-              let carbs = Int(carbs),
-              !name.isEmpty else {
-            print("Invalid input")
+    private func saveMeal() {
+        guard !name.isEmpty else {
+            print("Invalid input: Name is required")
             return
         }
-
-        let newMeal = User.Meal(
+        
+        userViewModel.addMeal(
             name: name,
             calories: calories,
-            carbs: carbs,
+            protein: protein,
             fat: fat,
-            protein: protein
+            carbs: carbs,
+            userID: userID
         )
-        userViewModel.addMeal(to: userID, meal: newMeal) // Correctly calling addMeal
     }
 }
+
 
 
 struct CalorieBar: View {

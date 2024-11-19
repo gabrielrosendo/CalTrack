@@ -9,9 +9,9 @@ struct User: Identifiable, Decodable {
     var proteinGoal: Int
     var meals: [Meal]
     
-    var id: String { _id } 
+    var id: String { _id }
     
-    struct Meal: Identifiable, Decodable {
+    struct Meal: Identifiable, Decodable, Equatable {
         var name: String
         var calories: Int
         var carbs: Int
@@ -19,5 +19,14 @@ struct User: Identifiable, Decodable {
         var protein: Int
         
         var id: String { name }
+
+        // Conform to Equatable by providing the == operator
+        static func ==(lhs: Meal, rhs: Meal) -> Bool {
+            return lhs.name == rhs.name &&
+                   lhs.calories == rhs.calories &&
+                   lhs.carbs == rhs.carbs &&
+                   lhs.fat == rhs.fat &&
+                   lhs.protein == rhs.protein
+        }
     }
 }
